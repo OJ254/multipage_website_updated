@@ -1,10 +1,11 @@
 class Navbar extends HTMLElement {
   connectedCallback() {
-    const basePath = window.location.pathname.includes(
-      "multipage_website_updated"
-    )
-      ? "/multipage_website_updated"
+    // Get current path and strip any potential folder name
+    const pathSegments = window.location.pathname.split("/");
+    const basePath = pathSegments.includes("multipage_website_updated")
+      ? `/${pathSegments.slice(2).join("/")}`
       : "";
+
     this.innerHTML = `
             <nav>
                 <ul>
@@ -16,4 +17,5 @@ class Navbar extends HTMLElement {
         `;
   }
 }
+
 customElements.define("navbar-component", Navbar);
