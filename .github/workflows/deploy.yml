@@ -11,23 +11,23 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3 # Update to v3
 
-      - name: Set up Node.js (optional, only if using a build step)
-        uses: actions/setup-node@v2
+      - name: Set up Node.js (if necessary)
+        uses: actions/setup-node@v3 # Update to v3
         with:
-          node-version: "14"
+          node-version: "16" # Or your desired version
 
-      - name: Install dependencies (optional, only if using a build step)
-        run: npm install
+      - name: Install dependencies (if necessary)
+        run: npm install # Only needed if your project uses npm
 
-      - name: Build (optional, only if using a build step)
-        run: npm run build
+      - name: Build the project (if necessary)
+        run: npm run build # Only needed if you are building the project before deployment
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: gh-pages # The branch to deploy to
-          folder: multipage_website_updated # Folder containing your website
+          branch: gh-pages # Branch to deploy to
+          folder: multipage_website_updated # Folder containing your site
           target_folder: / # Deploy to the root of the gh-pages branch
           token: ${{ secrets.GITHUB_TOKEN }}
